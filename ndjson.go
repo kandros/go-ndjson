@@ -6,7 +6,12 @@ import (
 	"io"
 )
 
-// ToJSONbuffer convert some newline-delimited JSON to valid JSON buffer
+// ToNewlineDelimitedJSON converts json to ndjson
+func ToNewlineDelimitedJSON(json []byte) {
+	// todo
+}
+
+// ToJSONbuffer converts some newline-delimited JSON to valid JSON buffer
 func ToJSONbuffer(reader io.Reader) bytes.Buffer {
 	var buffer bytes.Buffer
 
@@ -27,7 +32,7 @@ func ToJSONbuffer(reader io.Reader) bytes.Buffer {
 	return buffer
 }
 
-// ToJSON convert some newline-delimited JSON to valid JSON string
+// ToJSON converts some newline-delimited JSON to valid JSON string
 func ToJSON(reader io.Reader) string {
 	b := ToJSONbuffer(reader)
 	return b.String()
