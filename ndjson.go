@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"io"
+	"regexp"
 )
 
 // ToNewlineDelimitedJSON converts json to ndjson
@@ -35,5 +36,21 @@ func ToJSONbuffer(reader io.Reader) bytes.Buffer {
 // ToJSON converts some newline-delimited JSON to valid JSON string
 func ToJSON(reader io.Reader) string {
 	b := ToJSONbuffer(reader)
-	return b.String()
+
+	s, err := removeNewlines(b.String())
+	if err != nil {
+		panic(err)
+	}
+
+	return s
+}
+
+func removeNewlines(s string) (string, error) {
+	regex, err := regexp.Compile("\n")
+	if err != nil {
+		return "", err
+	}
+
+	s = regex.ReplaceAllString(s, "")
+	return s, nil
 }
