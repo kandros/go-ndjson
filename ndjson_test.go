@@ -14,7 +14,7 @@ func TestToJSON(t *testing.T) {
 
 	s := ToJSON(f)
 
-	want := `[{"data":"test"}]`
+	want := `[{"data":"one"},{"data":"two"},{"data":"three"},{"data":"four"}]`
 
 	if s != want {
 		t.Fatalf("\ngot:\n%s\nwant:\n %s", s, want)
